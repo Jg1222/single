@@ -6,31 +6,7 @@
 #  in the file PATENTS.  All contributing project authors may
 #  be found in the AUTHORS file in the root of the source tree.
 
-# Generate the config.h to compile with specific intrinsics / libs.
-
-# Check for compiler options.
-include(CheckCSourceCompiles)
-check_c_source_compiles(
-  "
-    int main(void) {
-      (void)__builtin_bswap16(0);
-      return 0;
-    }
-  "
-  HAVE_BUILTIN_BSWAP16)
-check_c_source_compiles(
-  "
-    int main(void) {
-      (void)__builtin_bswap32(0);
-      return 0;
-    }
-  "
-  HAVE_BUILTIN_BSWAP32)
-check_c_source_compiles(
-  "
-    int main(void) {
-      (void)__builtin_bswap64(0);
-      return 0;
+#
     }
   "
   HAVE_BUILTIN_BSWAP64)
