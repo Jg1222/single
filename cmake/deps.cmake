@@ -55,21 +55,6 @@ set(LT_OBJDIR ".libs/")
 find_package(OpenGL)
 set(WEBP_HAVE_GL ${OPENGL_FOUND})
 
-# Check if we need to link to the C math library. We do not look for it as it is
-# not found when cross-compiling, while it is here.
-check_c_source_compiles(
-  "
-    #include <math.h>
-    int main(int argc, char** argv) {
-      return (int)pow(argc, 2.5);
-    }
-  "
-  HAVE_MATH_LIBRARY)
-if(NOT HAVE_MATH_LIBRARY)
-  message(STATUS "Adding -lm flag.")
-  list(APPEND SHARPYUV_DEP_LIBRARIES m)
-  list(APPEND WEBP_DEP_LIBRARIES m)
-endif()
 
 # Find the standard image libraries.
 set(WEBP_DEP_IMG_LIBRARIES)
@@ -154,16 +139,7 @@ string(REGEX MATCHALL "\\[([0-9a-z\\.:/]*)\\]" CONFIGURE_AC_PACKAGE_INFO
              ${CONFIGURE_AC})
 function(strip_bracket VAR)
   string(LENGTH ${${VAR}} TMP_LEN)
-  math(EXPR TMP_LEN ${TMP_LEN}-2)
-  string(SUBSTRING ${${VAR}} 1 ${TMP_LEN} TMP_SUB)
-  set(${VAR} ${TMP_SUB} PARENT_SCOPE)
-endfunction()
-
-list(GET CONFIGURE_AC_PACKAGE_INFO 1 PACKAGE_VERSION)
-strip_bracket(PACKAGE_VERSION)
-list(GET CONFIGURE_AC_PACKAGE_INFO 2 PACKAGE_BUGREPORT)
-strip_bracket(PACKAGE_BUGREPORT)
-list(GET CONFIGURE_AC_PACKAGE_INFO 3 PACKAGE_URL)
+  math(EXPR )
 strip_bracket(PACKAGE_URL)
 
 # Build more info.
